@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Mr. Baby!</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #160912, #4b102c, #160912);
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+section {
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+section.active {
+    display: flex;
+}
+
+h1 {
+    font-size: clamp(32px, 8vw, 55px);
+    color: #ffb6ce;
+    text-shadow: 0 0 20px #ff4081;
+    margin: 20px;
+}
+
+h2 {
+    color: #ffd5e3;
+    margin: 15px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 15px auto;
+}
+
+button {
+    background: linear-gradient(45deg, #ff4f87, #d89aaf);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 30px;
+    font-size: 17px;
+    cursor: pointer;
+    margin: 15px;
+    box-shadow: 0 0 20px #ff4f87;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px #ff8db1;
+}
+
+/* Opening */
+
+.gift {
+    font-size: 100px;
+}
+
+/* Cake */
+
+.cake {
+    position: relative;
+    width: 230px;
+    margin: 90px auto 35px;
+}
+
+.candles {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    position: absolute;
+    top: -80px;
+    width: 100%;
+}
+
+.candle {
+    width: 12px;
+    height: 65px;
+    background: repeating-linear-gradient(
+        45deg,
+        white,
+        white 5px,
+        #ff7da5 5px,
+        #ff7da5 10px
+    );
+    border-radius: 5px;
+    position: relative;
+}
+
+.flame {
+    position: absolute;
+    width: 17px;
+    height: 27px;
+    background: radial-gradient(circle, #fff6a5, #ff9800, #ff4500);
+    border-radius: 50% 50% 30% 30%;
+    top: -28px;
+    left: -3px;
+    animation: flicker 0.4s infinite alternate;
+    box-shadow: 0 0 20px orange;
+    transform-origin: bottom;
+}
+
+@keyframes flicker {
+    from { transform: scale(1) rotate(-5deg); }
+    to { transform: scale(0.8) rotate(5deg); }
+}
+
+.cake-top {
+    height: 65px;
+    background: #ffc0d4;
+    border-radius: 15px 15px 5px 5px;
+    position: relative;
+}
+
+.cake-top::before {
+    content: "♥ ♥ ♥";
+    color: #b83261;
+    font-size: 22px;
+    position: absolute;
+    top: 18px;
+    width: 100%;
+}
+
+.cake-middle {
+    height: 55px;
+    background: #ff82a8;
+    border-radius: 5px 5px 15px 15px;
+    margin-top: 3px;
+}
+
+.cake-bottom {
+    height: 35px;
+    background: #ffe0e9;
+    border-radius: 5px 5px 15px 15px;
+    margin-top: 3px;
+}
+
+.flame.off {
+    display: none;
+}
+
+.smoke {
+    display: none;
+    position: absolute;
+    top: -40px;
+    left: -5px;
+    color: #ddd;
+    font-size: 25px;
+    animation: smoke 2s ease-out forwards;
+}
+
+@keyframes smoke {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-50px) scale(2); }
+}
+
+/* Final celebration */
+
+.confetti {
+    position: fixed;
+    top: -20px;
+    width: 10px;
+    height: 15px;
+    animation: fall 4s linear forwards;
+    z-index: 10;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.final-heart {
+    font-size: 75px;
+    animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+    50% { transform: scale(1.25); }
+}
+
+.small {
+    font-size: 14px;
+    color: #ffcada;
+}
+
+/* Midnight birthday invitation */
+
+body {
+    background-color: #17120f;
+    background-image:
+        linear-gradient(rgba(15, 13, 12, 0.48), rgba(15, 13, 12, 0.62)),
+        url("./birthday-background.png");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #f7f2e8;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(20, 15, 12, 0.12), rgba(12, 12, 11, 0.28));
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.24;
+    background-image:
+        radial-gradient(circle, rgba(255, 231, 167, 0.95) 0 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255, 211, 128, 0.85) 0 1.2px, transparent 2px);
+    background-size: 173px 181px, 239px 223px, 307px 281px;
+    background-position: 14px 26px, 73px 109px, 127px 58px;
+    animation: starlight 4.5s ease-in-out infinite alternate;
+}
+
+section {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 48px 24px;
+}
+
+section::after {
+    content: "";
+    position: absolute;
+    inset: 20px;
+    z-index: -1;
+    border: 1px solid rgba(248, 217, 138, 0.22);
+    border-radius: 28px;
+    box-shadow: inset 0 0 70px rgba(160, 126, 201, 0.08);
+    pointer-events: none;
+}
+
+section.active {
+    animation: scene-arrive 650ms ease both;
+}
+
+section.active .eyebrow,
+section.active h1 {
+    animation: rise-in 700ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+section.active h1 {
+    animation-delay: 100ms;
+}
+
+section.active .gift {
+    animation: gift-float 3.6s 700ms ease-in-out infinite,
+        rise-in 700ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+@keyframes scene-arrive {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes rise-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gift-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes starlight {
+    from { opacity: 0.12; }
+    to { opacity: 0.34; }
+}
+
+h1 {
+    max-width: 760px;
+    color: #f8df9b;
+    font-family: Georgia, serif;
+    font-size: clamp(38px, 8vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    text-shadow: 0 8px 35px rgba(248, 217, 138, 0.16);
+    margin: 18px;
+}
+
+h2 {
+    color: #bce7e1;
+    font-family: Georgia, serif;
+    letter-spacing: 0.08em;
+}
+
+p {
+    color: rgba(247, 242, 232, 0.82);
+    font-size: clamp(16px, 2.4vw, 19px);
+}
+
+.eyebrow {
+    color: #f0c967;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+}
+
+.gift {
+    filter: drop-shadow(0 12px 25px rgba(248, 217, 138, 0.3));
+    font-size: clamp(82px, 16vw, 118px);
+}
+
+button {
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: linear-gradient(135deg, #f8df9b, #e8a96d);
+    color: #211a2c;
+    font-weight: bold;
+    letter-spacing: 0.06em;
+    box-shadow: 0 10px 32px rgba(232, 169, 109, 0.2);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(232, 169, 109, 0.32);
+}
+
+.cake {
+    filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.3));
+}
+
+/* Dramatic cake entrance */
+#scene3 {
+    position: relative;
+}
+
+#scene3::before {
+    content: "";
+    position: absolute;
+    width: min(90vw, 620px);
+    height: 520px;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse, rgba(248, 217, 138, 0.20), transparent 68%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#scene3.active::before {
+    animation: cake-spotlight 1.5s ease 0.25s forwards;
+}
+
+.cake {
+    opacity: 0;
+    transform: translateY(110vh) scale(0.55) rotate(-14deg);
+    transform-origin: center bottom;
+    position: relative;
+    z-index: 2;
+}
+
+.cake.cake-arrive {
+    animation: cake-arrives 1.9s cubic-bezier(0.18, 0.85, 0.25, 1.15) forwards;
+}
+
+.cake::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 270px;
+    height: 18px;
+    left: 50%;
+    bottom: -19px;
+    transform: translateX(-50%) scaleX(0.2);
+    border-radius: 50%;
+    background: linear-gradient(90deg, #8d647c, #f8df9b, #8d647c);
+    box-shadow: 0 8px 28px rgba(248, 217, 138, 0.35);
+    opacity: 0;
+}
+
+.cake.cake-arrive::after {
+    animation: plate-arrives 700ms ease 1.25s forwards;
+}
+
+@keyframes cake-arrives {
+    0% {
+        opacity: 0;
+        transform: translateY(110vh) scale(0.55) rotate(-14deg);
+    }
+    65% {
+        opacity: 1;
+        transform: translateY(-18px) scale(1.04) rotate(3deg);
+    }
+    82% {
+        transform: translateY(8px) scale(0.98) rotate(-1deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0);
+    }
+}
+
+@keyframes plate-arrives {
+    from { opacity: 0; transform: translateX(-50%) scaleX(0.2); }
+    to { opacity: 1; transform: translateX(-50%) scaleX(1); }
+}
+
+@keyframes cake-spotlight {
+    0% { opacity: 0; }
+    45% { opacity: 1; }
+    100% { opacity: 0.75; }
+}
+
+/* Extra cinematic birthday animations */
+section.active {
+    animation: scene-arrive 900ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+section.active .eyebrow {
+    animation: eyebrow-reveal 900ms ease both;
+}
+
+@keyframes eyebrow-reveal {
+    from { opacity: 0; letter-spacing: 0.65em; filter: blur(5px); }
+    to { opacity: 1; letter-spacing: 0.24em; filter: blur(0); }
+}
+
+#scene1 .gift {
+    animation: gift-float 3s ease-in-out infinite, gift-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes gift-glow {
+    from { filter: drop-shadow(0 8px 15px rgba(248,217,138,.18)); }
+    to { filter: drop-shadow(0 8px 32px rgba(248,217,138,.7)); }
+}
+
+#scene2.active h1 {
+    animation: birthday-title 1.25s cubic-bezier(.16,1,.3,1) 150ms both;
+}
+
+@keyframes birthday-title {
+    0% { opacity: 0; transform: scale(.55) translateY(25px); filter: blur(10px); }
+    65% { opacity: 1; transform: scale(1.08) translateY(-4px); filter: blur(0); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+#scene2.active h2 {
+    animation: rise-in 900ms ease 500ms both;
+}
+
+#scene2.active p:not(.eyebrow) {
+    animation: rise-in 900ms ease 700ms both;
+}
+
+#scene3 .cake {
+    animation-fill-mode: both;
+}
+
+#scene3 .cake.cake-arrive {
+    filter: drop-shadow(0 18px 24px rgba(0,0,0,.3)) drop-shadow(0 0 24px rgba(248,217,138,.25));
+}
+
+#scene3 .cake-top,
+#scene3 .cake-middle,
+#scene3 .cake-bottom {
+    position: relative;
+}
+
+#scene3 .cake-top::after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    height: 12px;
+    left: 0;
+    bottom: -4px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.28);
+    filter: blur(4px);
+}
+
+.candle .flame {
+    animation: flicker .38s infinite alternate, flame-glow 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes flame-glow {
+    from { box-shadow: 0 0 10px #ff9d32, 0 0 20px rgba(255,153,0,.35); }
+    to { box-shadow: 0 0 18px #ffe18a, 0 0 34px rgba(255,153,0,.75); }
+}
+
+/* Floating balloons drift through the background */
+.balloon {
+    position: fixed;
+    bottom: -150px;
+    z-index: 0;
+    pointer-events: none;
+    font-size: 42px;
+    opacity: 0;
+    animation: balloon-rise var(--duration, 12s) linear forwards;
+}
+
+@keyframes balloon-rise {
+    0% { opacity: 0; transform: translate3d(0,0,0) rotate(-8deg); }
+    10% { opacity: .85; }
+    50% { transform: translate3d(35px,-55vh,0) rotate(8deg); }
+    100% { opacity: 0; transform: translate3d(-25px,-115vh,0) rotate(-5deg); }
+}
+
+/* Shooting stars across the night sky */
+.shooting-star {
+    position: fixed;
+    top: 12%;
+    left: -20%;
+    width: 130px;
+    height: 2px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(90deg, transparent, #fff1bd, transparent);
+    transform: rotate(-22deg);
+    animation: shooting 1.4s ease-out forwards;
+}
+
+@keyframes shooting {
+    0% { opacity: 0; transform: translate(0,0) rotate(-22deg); }
+    15% { opacity: 1; }
+    100% { opacity: 0; transform: translate(125vw,45vh) rotate(-22deg); }
+}
+
+/* Firework bursts used in the final birthday scene */
+.firework {
+    position: fixed;
+    z-index: 12;
+    pointer-events: none;
+    left: var(--x);
+    top: var(--y);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f8df9b;
+    box-shadow:
+        0 -42px #f8df9b, 0 42px #f8df9b,
+        42px 0 #bce7e1, -42px 0 #bce7e1,
+        30px 30px #ff9ebc, -30px -30px #ff9ebc,
+        30px -30px #fff1bd, -30px 30px #fff1bd;
+    animation: firework-pop 900ms ease-out forwards;
+}
+
+@keyframes firework-pop {
+    0% { opacity: 0; transform: scale(.1); }
+    20% { opacity: 1; transform: scale(.5); }
+    100% { opacity: 0; transform: scale(1.8); }
+}
+
+.final-heart {
+    animation: heartbeat 1.1s ease-in-out infinite !important;
+    box-shadow: 0 0 0 0 rgba(248,217,138,.25);
+}
+
+#scene4.active .final-heart {
+    animation: heartbeat 1.1s ease-in-out infinite, heart-halo 2s ease-out infinite !important;
+}
+
+@keyframes heart-halo {
+    0% { box-shadow: 0 0 0 0 rgba(248,217,138,.3); }
+    100% { box-shadow: 0 0 0 32px rgba(248,217,138,0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .balloon, .shooting-star, .firework { display: none !important; }
+}
+
+/* Tiny sparkles appear around the cake as it lands */
+.cake-sparkle {
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+    color: #f8df9b;
+    font-size: 24px;
+    opacity: 0;
+    animation: sparkle-pop 1.3s ease-out forwards;
+}
+
+@keyframes sparkle-pop {
+    0% { opacity: 0; transform: scale(0.2) rotate(0); }
+    35% { opacity: 1; transform: scale(1.3) rotate(90deg); }
+    100% { opacity: 0; transform: scale(0.4) rotate(180deg) translateY(-35px); }
+}
+
+.cake-top {
+    background: linear-gradient(135deg, #ffe5b1, #e9a98b);
+}
+
+.cake-top::before {
+    content: "✦  ✧  ✦";
+    color: #8b5260;
+}
+
+.cake-middle {
+    background: linear-gradient(135deg, #b680c1, #7a5a9c);
+}
+
+.cake-bottom {
+    background: linear-gradient(135deg, #bce7e1, #82b8b2);
+}
+
+.final-heart {
+    display: grid;
+    width: 112px;
+    height: 112px;
+    place-items: center;
+    border: 1px solid rgba(248, 217, 138, 0.5);
+    border-radius: 50%;
+    background: rgba(248, 217, 138, 0.09);
+    font-size: 58px;
+    animation: none;
+}
+
+.small {
+    color: #bce7e1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        background-attachment: scroll;
+        background-position: center top;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SCENE 1: OPENING -->
+
+<section id="scene1" class="active">
+
+    <p class="eyebrow">A one-of-a-kind celebration</p>
+    <div class="gift">🎁</div>
+
+    <h1>Hey, Mr. Baby!</h1>
+
+    <p>
+        Someone has a very special surprise waiting for you...
+        <br>
+        Are you ready?
+    </p>
+
+    <button onclick="openSurprise()">
+        OPEN YOUR SURPRISE ✨
+    </button>
+
+</section>
+
+
+<!-- SCENE 2: BIRTHDAY WISH -->
+
+<section id="scene2">
+
+    <p class="eyebrow">Tonight, you're the headline</p>
+    <div style="font-size:75px;">🎉⭐🎂</div>
+
+    <h1>HAPPY BIRTHDAY!</h1>
+
+    <h2>MR. BABY</h2>
+
+    <p>
+        Today is all about you!
+        <br>
+        May your life be filled with endless happiness,
+        great memories, lots of laughs, and awesome adventures.
+    </p>
+
+    <p>Here's to an amazing friend and an even better year ahead!</p>
+
+    <button onclick="showCake()">
+        THERE'S MORE FOR YOU 🎂
+    </button>
+
+</section>
+
+
+<!-- SCENE 3: CAKE -->
+
+<section id="scene3">
+
+    <p class="eyebrow">Make a wish</p>
+    <h1>Your Birthday Cake! 🎂</h1>
+
+    <p>
+        Every birthday deserves a beautiful cake
+        and a special wish.
+    </p>
+
+    <div class="cake">
+
+        <div class="candles">
+
+            <div class="candle">
+                <div class="flame"></div>
+                <div class="smoke">〰</div>
+            </div>
+
+            <div class="candle">
+                <div class="flame"></div>
+                <div class="smoke">〰</div>
+            </div>
+
+            <div class="candle">
+                <div class="flame"></div>
+                <div class="smoke">〰</div>
+            </div>
+
+            <div class="candle">
+                <div class="flame"></div>
+                <div class="smoke">〰</div>
+            </div>
+
+            <div class="candle">
+                <div class="flame"></div>
+                <div class="smoke">〰</div>
+            </div>
+
+        </div>
+
+        <div class="cake-top"></div>
+        <div class="cake-middle"></div>
+        <div class="cake-bottom"></div>
+
+    </div>
+
+    <h2 id="cakeMessage">Make a wish, Mr. Baby! ✨</h2>
+
+    <p id="instruction">
+        Close your eyes and think of your biggest wish...
+    </p>
+
+    <button id="startBlow" onclick="startMicrophone()">
+        BLOW THE CANDLES 💨
+    </button>
+
+    <button id="manualBlow" onclick="blowCandles()" style="display:none;">
+        BLOW NOW! 💨
+    </button>
+
+    <p class="small" id="micStatus">
+        Tap the button to enable microphone detection.
+    </p>
+
+</section>
+
+
+<!-- SCENE 4: FINAL SURPRISE -->
+
+<section id="scene4">
+
+    <p class="eyebrow">Wish mission: complete</p>
+    <div class="final-heart">🌟</div>
+
+    <h1>YAYYYYY!</h1>
+
+    <h2>YOU DID IT, MR. BABY! 🎉</h2>
+
+    <p>
+        Your candles are out!
+        <br>
+        May every wish you made come true.
+    </p>
+
+    <p>
+        Keep smiling, keep shining and never stop being
+        the wonderful person you are.
+    </p>
+
+    <h1>HAPPY BIRTHDAY! ✨</h1>
+
+    <p>
+        Hope your day is packed with good times, great cake, and plenty of laughs!
+    </p>
+
+    <div style="font-size:60px;">🎂✨🎊</div>
+
+</section>
+
+
+<script>
+
+// Scene navigation
+
+function changeScene(sceneId) {
+
+    document.querySelectorAll("section").forEach(section => {
+        section.classList.remove("active");
+    });
+
+    document.getElementById(sceneId).classList.add("active");
+
+    window.scrollTo(0, 0);
+}
+
+function openSurprise() {
+    changeScene("scene2");
+    confettiBlast();
+}
+
+function showCake() {
+    changeScene("scene3");
+
+    const cake = document.querySelector("#scene3 .cake");
+    cake.classList.remove("cake-arrive");
+
+    // Let the cake scene appear first, then bring the cake up from below.
+    setTimeout(() => {
+        cake.classList.add("cake-arrive");
+        cakeSparkles();
+    }, 250);
+}
+
+function cakeSparkles() {
+    const scene = document.getElementById("scene3");
+    const symbols = ["✦", "✧", "✨", "✦", "·"];
+
+    for (let i = 0; i < 18; i++) {
+        const sparkle = document.createElement("span");
+        sparkle.className = "cake-sparkle";
+        sparkle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+        // Keep sparkles around the cake, within the cake scene.
+        sparkle.style.left = (18 + Math.random() * 64) + "%";
+        sparkle.style.top = (38 + Math.random() * 35) + "%";
+        sparkle.style.animationDelay = (0.7 + Math.random() * 1.2) + "s";
+
+        scene.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 3500);
+    }
+}
+
+
+// Confetti animation
+
+function confettiBlast() {
+
+    for (let i = 0; i < 100; i++) {
+
+        const confetti = document.createElement("div");
+
+        confetti.className = "confetti";
+
+        confetti.style.left = Math.random() * 100 + "vw";
+
+        confetti.style.background =
+            ["#ff4081", "#ffd700", "#ffffff", "#ff80ab", "#aaffee"][
+                Math.floor(Math.random() * 5)
+            ];
+
+        confetti.style.animationDuration =
+            (2 + Math.random() * 3) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 5000);
+    }
+}
+
+
+function fireworksShow() {
+    for (let i = 0; i < 7; i++) {
+        setTimeout(() => {
+            const firework = document.createElement("div");
+            firework.className = "firework";
+            firework.style.setProperty("--x", (15 + Math.random() * 70) + "vw");
+            firework.style.setProperty("--y", (12 + Math.random() * 48) + "vh");
+            document.body.appendChild(firework);
+            setTimeout(() => firework.remove(), 1000);
+        }, i * 260);
+    }
+}
+
+
+// Ambient birthday decorations: balloons and shooting stars
+function createBalloon() {
+    const balloon = document.createElement("div");
+    balloon.className = "balloon";
+    balloon.textContent = ["🎈", "🎈", "💖", "✨"][Math.floor(Math.random() * 4)];
+    balloon.style.left = (Math.random() * 100) + "vw";
+    balloon.style.setProperty("--duration", (10 + Math.random() * 8) + "s");
+    document.body.appendChild(balloon);
+    setTimeout(() => balloon.remove(), 19000);
+}
+
+function createShootingStar() {
+    const star = document.createElement("div");
+    star.className = "shooting-star";
+    star.style.top = (5 + Math.random() * 45) + "vh";
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 1600);
+}
+
+setInterval(createBalloon, 2400);
+setInterval(createShootingStar, 5200);
+
+
+// Microphone-based candle detection
+
+let audioContext;
+let microphone;
+let analyser;
+let microphoneStream;
+let blowTimer;
+let lastBlowTime = 0;
+
+async function startMicrophone() {
+
+    const status = document.getElementById("micStatus");
+
+    try {
+
+        microphoneStream = await navigator.mediaDevices.getUserMedia({
+            audio: {
+                echoCancellation: false,
+                noiseSuppression: false,
+                autoGainControl: false
+            }
+        });
+
+        audioContext = new (
+            window.AudioContext || window.webkitAudioContext
+        )();
+
+        analyser = audioContext.createAnalyser();
+
+        analyser.fftSize = 1024;
+
+        microphone = audioContext.createMediaStreamSource(
+            microphoneStream
+        );
+
+        microphone.connect(analyser);
+
+        status.innerText =
+            "Microphone ready! Now blow towards your phone! 💨";
+
+        document.getElementById("startBlow").style.display = "none";
+
+        document.getElementById("manualBlow").style.display = "inline-block";
+
+        detectBlow();
+
+    } catch (error) {
+
+        status.innerText =
+            "Microphone unavailable. You can use the button below!";
+
+        document.getElementById("startBlow").style.display = "none";
+
+        document.getElementById("manualBlow").style.display = "inline-block";
+
+    }
+
+}
+
+
+// Detect sudden loud airflow-like sounds
+
+function detectBlow() {
+
+    if (!analyser) return;
+
+    const data = new Uint8Array(analyser.fftSize);
+
+    analyser.getByteTimeDomainData(data);
+
+    let sum = 0;
+
+    for (let i = 0; i < data.length; i++) {
+
+        const value = (data[i] - 128) / 128;
+
+        sum += value * value;
+    }
+
+    const volume = Math.sqrt(sum / data.length);
+
+    const now = Date.now();
+
+    // Adjust this threshold depending on the phone microphone.
+    // This detects loud sound, not airflow specifically.
+
+    if (volume > 0.12 && now - lastBlowTime > 1500) {
+
+        lastBlowTime = now;
+
+        blowTimer = (blowTimer || 0) + 1;
+
+        if (blowTimer >= 2) {
+
+            blowCandles();
+
+            return;
+        }
+
+    } else if (volume < 0.07) {
+
+        blowTimer = 0;
+    }
+
+    requestAnimationFrame(detectBlow);
+}
+
+
+// Blow candles
+
+function blowCandles() {
+
+    if (!document.getElementById("scene3").classList.contains("active")) {
+        return;
+    }
+
+    // Stop microphone
+
+    if (microphoneStream) {
+
+        microphoneStream.getTracks().forEach(track => track.stop());
+
+    }
+
+    if (audioContext && audioContext.state !== "closed") {
+        audioContext.close();
+    }
+
+    // Turn off flames
+
+    document.querySelectorAll(".flame").forEach(flame => {
+        flame.classList.add("off");
+    });
+
+    // Show smoke
+
+    document.querySelectorAll(".smoke").forEach(smoke => {
+
+        smoke.style.display = "block";
+
+        smoke.style.animation = "none";
+
+        void smoke.offsetWidth;
+
+        smoke.style.animation = "smoke 2s ease-out forwards";
+
+    });
+
+    document.getElementById("cakeMessage").innerText =
+        "WISH GRANTED! ✨";
+
+    document.getElementById("instruction").innerText =
+        "May all your dreams come true! ✨";
+
+    document.getElementById("startBlow").style.display = "none";
+
+    document.getElementById("manualBlow").style.display = "none";
+
+    document.getElementById("micStatus").innerText = "";
+
+    confettiBlast();
+
+    // Final surprise after 3 seconds
+
+    setTimeout(() => {
+
+        changeScene("scene4");
+
+        confettiBlast();
+        fireworksShow();
+        setTimeout(fireworksShow, 1800);
+
+    }, 3500);
+
+}
+
+</script>
+
+</body>
+</html>
