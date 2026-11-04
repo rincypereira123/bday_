@@ -790,7 +790,7 @@ section.active .eyebrow {
 
 <section id="scene4">
 
-    <p class="eyebrow">Wish mission: complete</p>
+    <p class="eyebrow">A wish made with love</p>
     <div class="final-heart">🌟</div>
 
     <h1>YAYYYYY!</h1>
@@ -974,7 +974,11 @@ async function startMicrophone() {
         microphone.connect(analyser);
 
         status.innerText =
-            "Microphone ready! Now blow towards your phone! 💨";
+            "Microphone is listening! Blow steadily towards your phone for about half a second. 💨";
+
+        detectionActive = true;
+        blowStartedAt = null;
+        ambientLevel = 0.015;
 
         document.getElementById("startBlow").style.display = "none";
 
@@ -996,48 +1000,46 @@ async function startMicrophone() {
 }
 
 
-// Detect sudden loud airflow-like sounds
+// Improved microphone detection.
+// Detects a continuous burst above the room's background sound level.
+// This detects sound intensity, not airflow directly.
+let blowStartedAt = null;
+let ambientLevel = 0.015;
+let detectionActive = false;
 
 function detectBlow() {
+    if (!analyser || !detectionActive) return;
 
-    if (!analyser) return;
-
-    const data = new Uint8Array(analyser.fftSize);
-
-    analyser.getByteTimeDomainData(data);
+    const data = new Float32Array(analyser.fftSize);
+    analyser.getFloatTimeDomainData(data);
 
     let sum = 0;
-
     for (let i = 0; i < data.length; i++) {
-
-        const value = (data[i] - 128) / 128;
-
-        sum += value * value;
+        sum += data[i] * data[i];
     }
 
-    const volume = Math.sqrt(sum / data.length);
+    const rms = Math.sqrt(sum / data.length);
 
-    const now = Date.now();
+    // Adapt slowly to quiet room noise.
+    if (rms < ambientLevel * 2.2) {
+        ambientLevel = ambientLevel * 0.96 + rms * 0.04;
+    }
 
-    // Adjust this threshold depending on the phone microphone.
-    // This detects loud sound, not airflow specifically.
+    const threshold = Math.max(0.035, ambientLevel * 2.8);
 
-    if (volume > 0.12 && now - lastBlowTime > 1500) {
-
-        lastBlowTime = now;
-
-        blowTimer = (blowTimer || 0) + 1;
-
-        if (blowTimer >= 2) {
-
-            blowCandles();
-
-            return;
+    if (rms > threshold) {
+        if (blowStartedAt === null) {
+            blowStartedAt = performance.now();
         }
 
-    } else if (volume < 0.07) {
-
-        blowTimer = 0;
+        // Require one continuous burst of roughly a quarter second.
+        if (performance.now() - blowStartedAt >= 250) {
+            detectionActive = false;
+            blowCandles();
+            return;
+        }
+    } else {
+        blowStartedAt = null;
     }
 
     requestAnimationFrame(detectBlow);
@@ -1052,7 +1054,9 @@ function blowCandles() {
         return;
     }
 
-    // Stop microphone
+    // Stop microphone and any further detection frames.
+
+    detectionActive = false;
 
     if (microphoneStream) {
 
